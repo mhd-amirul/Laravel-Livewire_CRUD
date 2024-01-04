@@ -36,7 +36,7 @@
             <div class="form-floating mb-3">
                 <textarea wire:model.live="comment" class="form-control @error('comment') border-danger @enderror"
                     placeholder="Leave a comment here" id="comment" style="height: 100px"></textarea>
-                <label for="comment">Comments</label>
+                <label for="comment">Description</label>
 
                 @error('comment')
                     <div id="comment-error" class="form-text text-danger">{{ $message }}</div>

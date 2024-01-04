@@ -11,7 +11,7 @@
                 <th scope="col" style="cursor: pointer" wire:click="sortBy('name')">Name</th>
                 <th scope="col" style="cursor: pointer" wire:click="sortBy('email')">Mail</th>
                 <th scope="col" style="cursor: pointer" wire:click="sortBy('phone')">Phone</th>
-                <th scope="col" style="cursor: pointer" wire:click="sortBy('comment')">Comment</th>
+                <th scope="col" style="cursor: pointer" wire:click="sortBy('comment')">Description</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>

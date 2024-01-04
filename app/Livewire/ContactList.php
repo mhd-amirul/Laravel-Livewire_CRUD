@@ -10,18 +10,19 @@ class ContactList extends Component
 {
     use WithPagination;
 
-    public $contact;
-    public $search = null;
-    protected $paginationTheme = 'bootstrap';
+    protected $paginationTheme    = 'bootstrap';
+    protected $listeners          = ['createContact' => 'render'];
+    protected $queryString        = ['sort', 'search', 'sortType'];
 
-    protected $listeners = ['createContact' => 'render'];
+    public $contact;
+    public $sort        = 'name';
+    public $search      = null;
+    public $sortType    = true;
 
     public function render()
     {
-        // $this->contact = $this->getContact();
-
         return view('livewire.contact-list', [
-            'data' => $this->getContact()
+            'data' => $this->getContact()->orderBy($this->sort, $this->sortType ? 'asc' : 'desc')->paginate(10)
         ]);
     }
 
@@ -30,14 +31,24 @@ class ContactList extends Component
         $this->resetPage();
     }
 
+    public function sortBy($field)
+    {
+        if ($field === $this->sort) {
+            $this->sortType = !$this->sortType;
+        } else {
+            $this->sortType = true;
+        }
+
+        $this->sort = $field;
+    }
+
     public function getContact()
     {
-        $search       = $this->search;
         $contactModel = new Contact();
 
-        return $search
-            ? $contactModel->searchByAllField($search)->limit(10)->paginate(10)
-            : $contactModel->latest()->paginate(10);
+        return $this->search
+            ? $contactModel->searchByAllField($this->search)
+            : $contactModel;
     }
 
     public function deleteContact($id)

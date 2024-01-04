@@ -1,6 +1,6 @@
 <div class="col-8 mt-5">
     <div class="form-floating mb-3">
-        <input wire:model.live.debounce.1000ms="search" type="text" class="form-control" id="search"
+        <input wire:model.live.debounce.300ms="search" type="text" class="form-control" id="search"
             placeholder="Search">
         <label for="search">Search...</label>
     </div>
@@ -8,10 +8,10 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Mail</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Comment</th>
+                <th scope="col" style="cursor: pointer" wire:click="sortBy('name')">Name</th>
+                <th scope="col" style="cursor: pointer" wire:click="sortBy('email')">Mail</th>
+                <th scope="col" style="cursor: pointer" wire:click="sortBy('phone')">Phone</th>
+                <th scope="col" style="cursor: pointer" wire:click="sortBy('comment')">Comment</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>

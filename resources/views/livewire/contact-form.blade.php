@@ -9,7 +9,7 @@
 
             <div class="form-floating mb-3">
                 <input wire:model.live="name" type="text" class="form-control @error('name') border-danger @enderror"
-                    id="name" placeholder="Name" livewire>
+                    id="name" placeholder="Name">
                 <label for="name">Name</label>
 
                 @error('name')

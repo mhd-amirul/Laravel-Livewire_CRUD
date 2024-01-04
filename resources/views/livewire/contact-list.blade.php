@@ -1,4 +1,9 @@
 <div class="col-8 mt-5">
+    <div class="form-floating mb-3">
+        <input wire:model.live.debounce.1000ms="search" type="text" class="form-control" id="search"
+            placeholder="Search">
+        <label for="search">Search...</label>
+    </div>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -11,9 +16,12 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($contact as $i)
+            @php
+                $number = 10 * $data->currentPage() - 10 + 1;
+            @endphp
+            @forelse ($data as $i)
                 <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
+                    <th scope="row">{{ $number }}</th>
                     <td id="contact-name-{{ $i->id }}">{{ $i->name }}</td>
                     <td id="contact-email-{{ $i->id }}">{{ $i->email }}</td>
                     <td id="contact-phone-{{ $i->id }}">{{ $i->phone }}</td>
@@ -26,11 +34,15 @@
                             wire:click="deleteContact({{ $i->id }})"><b>delete</b></a>
                     </td>
                 </tr>
+                @php
+                    $number++;
+                @endphp
             @empty
                 <tr>
-                    <th scope="row" colspan="5" class="text-center">No data found!</th>
+                    <th scope="row" colspan="6" class="text-center">No data found!</th>
                 </tr>
             @endforelse
         </tbody>
     </table>
+    {{ $data->links() }}
 </div>

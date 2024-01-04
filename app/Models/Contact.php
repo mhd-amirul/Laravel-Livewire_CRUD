@@ -15,4 +15,13 @@ class Contact extends Model
         "phone",
         "comment",
     ];
+
+    public function searchByAllField($search)
+    {
+        return $this->where(function ($q) use ($search) {
+            $q->where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('phone', 'like', '%' . $search . '%');
+        });
+    }
 }
